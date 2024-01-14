@@ -22,10 +22,20 @@ func main() {
 	db.AutoMigrate(&User{})
 
 	// GORMを使ったデータベース操作をここに記述
-	user := User{Name: "John Doe", Email: "joen@example.com"}
-	result := db.Create(&user)
-	if result.Error != nil {
-		panic("failed to insert record")
-	}
+	/*
+		user := User{Name: "John Doe", Email: "joen@example.com"}
+		result := db.Create(&user)
+		if result.Error != nil {
+			panic("failed to insert record")
+		}
+	*/
+	var user User
+	db.First(&user)
+	db.Where("name=?", "John Doe").Find(&user)
+	var users []User
+	db.Find(&users)
+}
+
+func Create() {
 
 }
