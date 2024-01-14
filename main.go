@@ -34,6 +34,13 @@ func main() {
 	db.Where("name=?", "John Doe").Find(&user)
 	var users []User
 	db.Find(&users)
+
+	user.Name = "Jane Doe"
+	db.Save(&user)
+
+	db.Model(&user).Update("email", "hoge@example.com")
+
+	db.Model(&user).Updates(map[string]interface{}{"name": "Jane DDD", "email": "foo@example.com"})
 }
 
 func Create() {
